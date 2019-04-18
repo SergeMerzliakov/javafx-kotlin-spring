@@ -48,7 +48,7 @@ compileTestKotlin {
 
 task runApp(type: JavaExec) {
     group = "Application"
-    description = "Runs Application 1 - Basic JavaFx"
+    description = "Runs Application 1 - JavaFx, Kotlin, Spring 5"
     classpath sourceSets.main.runtimeClasspath
     main = 'org.epistatic.springkotlin.Main'
     doFirst {
