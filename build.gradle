@@ -1,0 +1,60 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.30'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+def KOTLIN_VERSION = "1.3.30"
+
+
+// BEGIN YOUR SETUP
+def JFX_INSTALL = '/Library/Java/javafx/12.0' // e.g. /libs/javafx/12
+// END YOUR SETUP
+
+group 'org.epistatic'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs "${JFX_INSTALL}/lib"
+    }
+}
+
+apply plugin: 'application'
+mainClassName = 'org.epistatic.springkotlin.Main'
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    compile "com.google.guava:guava:27.1-jre"
+	compile "org.springframework:spring-context:5.1.6.RELEASE"
+
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+    testCompile "org.assertj:assertj-core:3.11.1"
+    testCompile "org.testfx:testfx-core:4.0.15-alpha"
+    testCompile "org.testfx:testfx-junit:4.0.15-alpha"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+task runApp(type: JavaExec) {
+    group = "Application"
+    description = "Runs Application 1 - Basic JavaFx"
+    classpath sourceSets.main.runtimeClasspath
+    main = 'org.epistatic.springkotlin.Main'
+    doFirst {
+        jvmArgs = [
+                '--module-path', "${JFX_INSTALL}/lib",
+                '--add-modules', 'javafx.fxml,javafx.controls'
+        ]
+    }
+}
