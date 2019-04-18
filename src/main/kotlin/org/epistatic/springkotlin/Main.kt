@@ -2,12 +2,14 @@ package org.epistatic.springkotlin
 
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.layout.GridPane
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
+import org.epistatic.springkotlin.config.ApplicationConfig
 import org.epistatic.springkotlin.controller.ApplicationController
+import org.epistatic.springkotlin.service.FileService
+import org.springframework.context.annotation.AnnotationConfigApplicationContext
+
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -28,18 +30,29 @@ import org.epistatic.springkotlin.controller.ApplicationController
  * under the License.
  **/
 
+
 class Main : Application() {
 
+   var context:AnnotationConfigApplicationContext
+   
+   init {
+      context = AnnotationConfigApplicationContext(ApplicationConfig::class.java)
+   }
+   
 	@Throws(Exception::class)
 	override fun start(primaryStage: Stage) {
-		val controller = ApplicationController()
-		val loader = FXMLLoader(javaClass.getResource("/springkotlin.fxml"))
-		loader.setController(controller)
-		val root = loader.load<Pane>()
 
-		primaryStage.title = "Spring, Events, MultipleControllers"
-		primaryStage.scene = Scene(root, 650.0, 550.0)
-		primaryStage.show()
+      // load services as beans and inject into relevant controllers
+      val fileServiceBean = context.getBean("fileService") as FileService
+
+      val controller = ApplicationController(fileServiceBean)
+      val loader = FXMLLoader(javaClass.getResource("/springkotlin.fxml"))
+      loader.setController(controller)
+      val root = loader.load<Pane>()
+
+      primaryStage.title = "Spring, Events, MultipleControllers"
+      primaryStage.scene = Scene(root, 650.0, 550.0)
+      primaryStage.show()
 	}
 
 	companion object {

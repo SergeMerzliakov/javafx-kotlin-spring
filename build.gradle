@@ -31,7 +31,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     compile "com.google.guava:guava:27.1-jre"
-	compile "org.springframework:spring-context:5.1.6.RELEASE"
+	compile "org.springframework:spring-core:5.1.6.RELEASE"
+    compile "org.springframework:spring-context-support:5.1.6.RELEASE"
 
     testCompile "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
     testCompile "org.assertj:assertj-core:3.11.1"

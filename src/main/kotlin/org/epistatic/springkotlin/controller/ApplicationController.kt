@@ -7,6 +7,7 @@ import javafx.scene.control.Button
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
+import org.epistatic.springkotlin.service.FileService
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -30,7 +31,7 @@ import javafx.stage.Stage
 /**
  * Controller for app3/app3.fxml. Manages the main UI and all the other controllers
  */
-class ApplicationController {
+class ApplicationController(val fileService: FileService) {
 
    @FXML lateinit var exitButton: Button
    @FXML lateinit var leftPane: AnchorPane
