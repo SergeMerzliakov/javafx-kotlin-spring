@@ -31,21 +31,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  **/
 
 
+/**
+ * Uses Spring Context to manage services as beans which are shared
+ * across one or more application controllers
+ */
 class Main : Application() {
+   private val context: AnnotationConfigApplicationContext = AnnotationConfigApplicationContext(ApplicationConfig::class.java)
 
-   var context:AnnotationConfigApplicationContext
-   
-   init {
-      context = AnnotationConfigApplicationContext(ApplicationConfig::class.java)
-   }
-   
-	@Throws(Exception::class)
-	override fun start(primaryStage: Stage) {
+   @Throws(Exception::class)
+   override fun start(primaryStage: Stage) {
+      val controller = initializeControllers() 
 
-      // load services as beans and inject into relevant controllers
-      val fileServiceBean = context.getBean("fileService") as FileService
-
-      val controller = ApplicationController(fileServiceBean)
       val loader = FXMLLoader(javaClass.getResource("/springkotlin.fxml"))
       loader.setController(controller)
       val root = loader.load<Pane>()
@@ -53,12 +49,20 @@ class Main : Application() {
       primaryStage.title = "Spring, Events, MultipleControllers"
       primaryStage.scene = Scene(root, 650.0, 550.0)
       primaryStage.show()
-	}
+   }
 
-	companion object {
-		@JvmStatic
-		fun main(args: Array<String>) {
-			Application.launch(Main::class.java, *args)
-		}
-	}
+   /**
+    * load services as beans and inject into relevant controllers
+    */
+   private fun initializeControllers(): ApplicationController {
+      val fileServiceBean = context.getBean("fileService") as FileService
+      return ApplicationController(fileServiceBean)
+   }
+
+   companion object {
+      @JvmStatic
+      fun main(args: Array<String>) {
+         Application.launch(Main::class.java, *args)
+      }
+   }
 }
