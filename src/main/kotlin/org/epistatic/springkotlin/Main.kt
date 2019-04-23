@@ -7,7 +7,6 @@ import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import org.epistatic.springkotlin.config.ApplicationConfig
 import org.epistatic.springkotlin.controller.ApplicationController
-import org.epistatic.springkotlin.service.FileService
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 
@@ -40,7 +39,8 @@ class Main : Application() {
 
    @Throws(Exception::class)
    override fun start(primaryStage: Stage) {
-      val controller = initializeControllers() 
+      // load all controllers via Spring Framework
+      val controller = context.getBean("applicationController") as ApplicationController
 
       val loader = FXMLLoader(javaClass.getResource("/springkotlin.fxml"))
       loader.setController(controller)
@@ -51,18 +51,10 @@ class Main : Application() {
       primaryStage.show()
    }
 
-   /**
-    * load services as beans and inject into relevant controllers
-    */
-   private fun initializeControllers(): ApplicationController {
-      val fileServiceBean = context.getBean("fileService") as FileService
-      return ApplicationController(fileServiceBean)
-   }
-
    companion object {
       @JvmStatic
       fun main(args: Array<String>) {
-         Application.launch(Main::class.java, *args)
+         launch(Main::class.java, *args)
       }
    }
 }

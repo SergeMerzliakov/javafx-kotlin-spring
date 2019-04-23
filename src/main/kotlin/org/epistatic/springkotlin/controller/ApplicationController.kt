@@ -1,13 +1,11 @@
 package org.epistatic.springkotlin.controller
 
-import com.google.common.eventbus.EventBus
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.control.Button
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
-import org.epistatic.springkotlin.service.FileService
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -29,22 +27,16 @@ import org.epistatic.springkotlin.service.FileService
  **/
 
 /**
- * Controller for app3/app3.fxml. Manages the main UI and all the other controllers
+ * Controller for app3/app3.fxml. Manages the main UI and all the other controllers.
+ * All controllers are configured as Spring Beans
  */
-class ApplicationController(val fileService: FileService) {
+class ApplicationController(private val fileListController: FileListController, private val fileDataController: FileDataController, private val filePropertiesController: FilePropertiesController) {
 
    @FXML lateinit var exitButton: Button
    @FXML lateinit var leftPane: AnchorPane
    @FXML lateinit var topRightPane: AnchorPane
    @FXML lateinit var bottomRightPane: AnchorPane
 
-   // this bus is used application wide
-   private val applicationEventBus = EventBus()
-   private val fileListController = FileListController(applicationEventBus)
-   private val fileDataController = FileDataController(applicationEventBus)
-   private val filePropertiesController = FilePropertiesController(applicationEventBus)
-
-   @FXML
    fun initialize() {
 
       // load file list UI and insert into it's pane in the application
