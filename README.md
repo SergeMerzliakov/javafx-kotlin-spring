@@ -3,7 +3,7 @@ This repo will include sample applications using **Spring Framework 5** with des
 
 The goal is to provide demo applications, which work out of the box. If they don't work - let me know! I hate demos that don't work.
 
-All applications can be run from the command line, as long as the required software is installed (see Install section).
+The application can be run from the command line without an IDE, as long as the required software is installed (see Install section).
 
 
 #### Philosophy
