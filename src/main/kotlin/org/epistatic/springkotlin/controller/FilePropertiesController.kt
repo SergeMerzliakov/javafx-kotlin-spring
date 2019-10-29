@@ -6,6 +6,7 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.control.Label
 import javafx.scene.layout.Pane
+import org.springframework.stereotype.Component
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -29,6 +30,7 @@ import javafx.scene.layout.Pane
 /**
  * Controller for fileProperties.fxml
  */
+@Component
 class FilePropertiesController(eventBus: EventBus) : EventAwareController(eventBus) {
 
 	@FXML lateinit var nameLabel: Label

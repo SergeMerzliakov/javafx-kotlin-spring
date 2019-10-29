@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.control.Label
 import javafx.scene.control.TextArea
 import javafx.scene.layout.Pane
+import org.springframework.stereotype.Component
 import java.io.File
 import java.nio.charset.Charset
 
@@ -32,6 +33,7 @@ import java.nio.charset.Charset
 /**
  * Controller for fileData.fxml - which displays the contents of file in a TextArea
  */
+@Component
 class FileDataController(eventBus: EventBus) : EventAwareController(eventBus) {
 
    companion object {

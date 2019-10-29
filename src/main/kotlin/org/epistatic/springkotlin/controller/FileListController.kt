@@ -9,6 +9,7 @@ import javafx.scene.control.Label
 import javafx.scene.control.ListView
 import javafx.scene.input.TransferMode
 import javafx.scene.layout.Pane
+import org.springframework.stereotype.Component
 import java.io.File
 
 /**
@@ -33,6 +34,7 @@ import java.io.File
 /**
  * Controller for fileList.fxml - the list if files dragged into the application
  */
+@Component
 class FileListController(eventBus: EventBus) : EventAwareController(eventBus) {
 
 	// view

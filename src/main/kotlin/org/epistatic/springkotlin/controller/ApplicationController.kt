@@ -6,6 +6,7 @@ import javafx.scene.control.Button
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
+import org.springframework.stereotype.Component
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -30,6 +31,7 @@ import javafx.stage.Stage
  * Controller for app3/app3.fxml. Manages the main UI and all the other controllers.
  * All controllers are configured as Spring Beans
  */
+@Component
 class ApplicationController(private val fileListController: FileListController, private val fileDataController: FileDataController, private val filePropertiesController: FilePropertiesController) {
 
    @FXML lateinit var exitButton: Button
