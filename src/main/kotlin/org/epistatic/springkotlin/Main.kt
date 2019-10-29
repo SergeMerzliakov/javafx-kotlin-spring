@@ -47,7 +47,7 @@ class Main : Application() {
       val root = loader.load<Pane>()
 
       primaryStage.title = "Spring, Events, MultipleControllers"
-      primaryStage.scene = Scene(root, 650.0, 550.0)
+      primaryStage.scene = Scene(root, 750.0, 550.0)
       primaryStage.show()
    }
 
