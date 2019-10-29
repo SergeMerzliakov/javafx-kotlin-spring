@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 /**
- * All controllers and EventBus are Spring beans using contructored based Dependency Injection
+ * All controllers and EventBus are Spring beans using Contructor-based Dependency Injection
  */
 @Configuration
 open class ApplicationConfig {
